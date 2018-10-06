@@ -1,10 +1,31 @@
 package hadoopExample;
 
 public class WordCount{
-	//map file as key to the values of the words and count inside the segments of the file
+//update with structure of pseudocode from notes
 	
-	//then we need to group by the keysm and words those key value pairs to the appropriate nodes
+//map
+	//key: document name
+	//value: text of the document
+	//for each word w in value
+		//emit (w,1)
 	
-	//reduce would be take all of the various key value pairs and add up all the counts
+//reduce
+	//key: a word
+	//value: an iterator over counts
+	//result = 0
+	//for each count v in values:
+		//result += v
+	//emit(key, result)
+	
+
+	public static void main(String args[]) {
+		//load file
+		
+		//call mapreduce somehow? 
+			//Do I do that from inside the program?
+			//is it from the command line like the example program?
+		
+		//write output to file somewhere
+	}
 	
 }
