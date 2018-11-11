@@ -3,17 +3,19 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>CIS5517</groupId>
-  <artifactId>wordCount</artifactId>
+  <artifactId>jsonMerger</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>wordCount</name>
+  <name>jsonMerger</name>
   <url>http://maven.apache.org</url>
   
 	
 	 <properties>
 		 <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		 <hadoop.version>2.9.1</hadoop.version>
+   		 <maven.compiler.source>1.6</maven.compiler.source>
+    	 <maven.compiler.target>1.6</maven.compiler.target>
 	 </properties>
 	
 	 <dependencies>
@@ -24,10 +26,9 @@
 			 <scope>provided</scope>
 		 </dependency>
 		 <dependency>
-			 <groupId>junit</groupId>
-			 <artifactId>junit</artifactId>
-			 <version>3.8.1</version>
-			 <scope>test</scope>
+			 <groupId>org.json</groupId>
+			 <artifactId>json</artifactId>
+			 <version>20180813</version>
 		 </dependency>
 	 </dependencies>
 </project>
