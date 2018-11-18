@@ -36,21 +36,10 @@ public class jsonMapper extends Mapper<Text, Text, Text, Text>{
     	for(String json: jsons) {
     		JSONObject tempJson = null;
     		try {
+    			//take the string, convert it to a json and add the timestamp as a field
 				tempJson = new JSONObject(json);
-				Date lastUpdated;
-		    	//a date formatter according to the header from the file (20181015141058 for oct 15th 2018 2:10:58 pm)
-		    	SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
-		    	//try to get the date according to the format
-		    	try {
-		    		//convert it to a java date so i dont need to implement my own date comparator in reducer
-					lastUpdated = formatter.parse(timeStamp);
-		    		tempJson.put("fileTimeStamp",lastUpdated.toString());
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+	    		tempJson.put("timeStamp",timeStamp);
 			} catch (JSONException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
         	//write the key (the id string) and the value (the total json) to the context for the reducers
@@ -64,6 +53,7 @@ public class jsonMapper extends Mapper<Text, Text, Text, Text>{
     }
 
 	String[] getIdAndTimestamp(String filepath) {
+		//"splits" the filename using _ and .txt so we get an array 2 long with the article ID as index 0 and the timestamp as 1
 		String pattern = "_|\\.txt";
 		Pattern p = Pattern.compile(pattern);
 		String[] retStrings = p.split(filepath);

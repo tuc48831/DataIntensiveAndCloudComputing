@@ -23,12 +23,15 @@ public class jsonMerger {
 		job.setReducerClass(jsonReducer.class);
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(Text.class);
+		job.setOutputFormatClass(LazyOutputFormat.class);
 		
-		//TODO: change input to properly get directory
-		FileInputFormat.addInputPath(job, new Path(args[0]));
-		//TODO change output
-		FileOutputFormat.setOutputPath(job, new Path(args[1]));
+		Path input = new Path("./input");
+		FileInputFormat.addInputPath(job, input);
+
+		Path output = new Path("./output");
+		FileOutputFormat.setOutputPath(job, output);
 		
 		System.exit(job.waitForCompletion(true) ? 0 : 1);
+		//do i need to get all the article ids at the start to map them to files?
 	}
 }

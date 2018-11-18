@@ -1,7 +1,10 @@
 package CIS5517.wordCount;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Set;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
@@ -15,16 +18,19 @@ public class jsonReducer extends Reducer<Text,Text,Text,Text> {
 //TODO update with proper merging, logging, and output
 	private Text result = new Text();
 	private JSONObject returnJson;
-	private MultipleOutputs mos;
 	//the article ID used to generate the output file name
 	private String articleID;
-  
-	public void setup(JobConf context) {
-		mos = new MultipleOutputs(context);
+	private MultipleOutputs output;
+
+	public void configure(JobConf conf) {
+		output = new MultipleOutputs(conf);
+	}
+	@Override
+	public void cleanup(Context context) throws IOException, InterruptedException {
+		output.close();
 	}
 	
 	public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException, JSONException{
-	    String jsonAsString;
 	    for (Text text : values) {
 	    	//convert each value to a json
 	    	try {
@@ -32,9 +38,9 @@ public class jsonReducer extends Reducer<Text,Text,Text,Text> {
 				//if we currently dont have any return json for this reducer, set it to the json we just decoded
 				if(returnJson == null ) {
 					returnJson = tempJson;
-				//else we should compare them, logging any diffs, and updating to the newer json based on the timestamp we added in the map step
+				//else we should compare them, logging any diffs, and updating
 				} else {
-					returnJson = logDiffsAndUpdate(returnJson, tempJson);
+					returnJson = logDiffsAndUpdate(returnJson, tempJson, context);
 				}
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
@@ -43,38 +49,59 @@ public class jsonReducer extends Reducer<Text,Text,Text,Text> {
     	}
 	    result.set(returnJson.toString());
 	    context.write(key, result);
+	    context.write(key, result, generateFileName(key));
 	}
 	
-	private JSONObject logDiffsAndUpdate(JSONObject currentJson, JSONObject tempJson) {
+	private JSONObject logDiffsAndUpdate(JSONObject currentJson, JSONObject tempJson, Context context) {
 		//get timestamps from both objects
-		Date currentJsonDate = new Date(currentJson.getString("fileTimeStamp"));
-		Date tempJsonDate = new Date(tempJson.getString("fileTimeStamp"));
-		JSONObject returnJson;
+		Date currentJsonDate = null;
+		Date tempJsonDate = null;
+		try {
+	    	//a date formatter according to the header from the file (20181015141058 for oct 15th 2018 2:10:58 pm)
+	    	SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
+    		//convert it to a java date so i dont need to implement my own date comparator
+	    	currentJsonDate = formatter.parse(currentJson.getString("timeStamp"));
+	    	tempJsonDate = formatter.parse(tempJson.getString("timeStamp"));
+	    	//remove the timestamp field i added to preserve data integrity
+	    	currentJson.remove("timeStamp");
+	    	tempJson.remove("timeStamp");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
 		//indicator tells which JSON object is the newer one so it can be passed to the logDiffs fx
 		int indicator = 0;
 		//replace returnJson with tempJson if temp is newer, else return the currentJson
 		if(tempJsonDate.after(currentJsonDate)) {
-			returnJson = tempJson;
 			indicator = 2;
 		}else {
-			returnJson = currentJson;
 			indicator = 1;
 		}
-		logDiffs(currentJson, tempJson, indicator);
+		JSONObject returnJson = logDiffsAndMerge(currentJson, tempJson, indicator, context);
 		
 		return returnJson;
 	}
 
-	private void logDiffs(JSONObject currentJson, JSONObject tempJson, int indicator) {
-		//get the fields for both
-		
-		//check if the sets of fields are equal
-			//if not, combine them into a new set
+	private JSONObject logDiffsAndMerge(JSONObject currentJson, JSONObject tempJson, int indicator, Context context) {
+		JSONObject returnJson = new JSONObject();
+		//the 3 fields are, cursor, code, and responses. I will hardcode what I want to happen
+		boolean cursorIsDifferent = currentJson.getString("cursor").equals(tempJson.getString("cursor"));
+		boolean codeIsDifferent = currentJson.getString("code").equals(tempJson.getString("code"));
+		boolean responseIsDifferent = currentJson.getString("response").equals(tempJson.getString("response"));
+		//use indicator to see which object is newer, and use that as the base case
+		if(indicator == 2) { //if indicator is 2, them tempjson is newer
+			if(cursorIsDifferent) {
+				
+			}
+		} else { //else tempjson is older
+			
+		}
 		
 		//iterate through the complete set, checking the newer object for the field (using the indicator)
 			//if the field is reponse, call the specific response logger
 			//else can compare raw
 		
+		return returnJson;
 	}
 	
 	private String generateFileName(Text key) {
@@ -82,7 +109,4 @@ public class jsonReducer extends Reducer<Text,Text,Text,Text> {
 		return retString;
 	}
 	
-	public void cleanup(Context context) throws IOException, InterruptedException{
-		mos.close();
-	}
 }
