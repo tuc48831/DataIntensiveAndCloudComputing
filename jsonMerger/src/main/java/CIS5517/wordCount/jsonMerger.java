@@ -23,6 +23,7 @@ public class jsonMerger {
 		job.setReducerClass(jsonReducer.class);
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(Text.class);
+		//think lazy output format will give me individual files
 		job.setOutputFormatClass(LazyOutputFormat.class);
 		
 		Path input = new Path("./input");
