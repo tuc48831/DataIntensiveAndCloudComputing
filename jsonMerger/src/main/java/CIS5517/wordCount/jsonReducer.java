@@ -5,6 +5,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -21,9 +23,11 @@ public class jsonReducer extends Reducer<Text,Text,Text,Text> {
 	private Logger logger = Logger.getLogger(jsonReducer.class);
 	private Text result = new Text();
 	private JSONObject returnJson;
+	private String articleID;
 	
 	public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException, JSONException{
-	    for (Text text : values) {
+	    this.articleID = key.toString();
+		for (Text text : values) {
 	    	//convert each value to a json
 	    	try {
 				JSONObject tempJson = new JSONObject(text.toString());
@@ -111,20 +115,77 @@ public class jsonReducer extends Reducer<Text,Text,Text,Text> {
 		return returnJson;
 	}
 	
-	private JSONObject[] mergeResponses(JSONObject currentJson, JSONObject tempJson, int indicator) {
-		JSONArray currentArray = currentJson.getJSONArray("responses");
-		JSONArray tempArray = tempJson.getJSONArray("responses");
-		//
-		if(indicator == 2) { //if indicator is 2, them tempjson is newer
-			//iterate through older array first, adding them to a hashmap
-			//iterate through newer array second, if there is a collision, check if theyre different. mark whats different and then replace
-		} else { //else tempjson is older
-			//iterate through older array first, adding them to a hashmap
-			//iterate through newer array second, if there is a collision, check if theyre different. mark whats different and then replace
+	private Collection<JSONObject> mergeResponses(JSONObject currentJson, JSONObject tempJson, int indicator) {
+		JSONArray currentArray = currentJson.getJSONArray("response");
+		JSONArray tempArray = tempJson.getJSONArray("response");
+		HashMap<Integer, JSONObject> responseSet = new HashMap<Integer, JSONObject>();
+		//inside this function i swap temp and current based on the indicator. indicator = 2 means that temp is newer (the default case), 1 means i need to swap
+		if(indicator == 1) { //since the temp is older
+			JSONArray temp = tempArray;
+			tempArray = currentArray;
+			currentArray = temp;
+		} //this is gross but saves A LOT of duplicate code below
+		//iterate through older array first, adding them to a hashmap on the ID field
+		for(int i=0; i < currentArray.length(); i++) {
+			responseSet.put(currentArray.getJSONObject(i).getInt("id"), currentArray.getJSONObject(i));
+			//also check if the id from the current array is missing from the new one and log it
+			boolean matched = false;
+			//this is gross because the double for loop makes it look n^2 but the number of responses per article doesn't ever really get too big
+			for(int j=0; j < tempArray.length(); j++) {
+				if(currentArray.get(i).equals(tempArray.get(j))) {
+					matched = true;
+				}
+			}
+			if(! matched) {
+				logger.info("For the article with ID: " + articleID + " the response node id: "+ currentArray.getJSONObject(i).getString("id") + 
+						"was in Ji but not in Ji+1");
+			}
 		}
-		//convert hashmap into array so its a collection
-		
-		return null;
+		//iterate through newer array second, if there is a collision, check if theyre different. mark whats different and then replace
+		for(int i=0; i < tempArray.length(); i++) {
+			if(responseSet.containsKey(tempArray.getJSONObject(i).getInt("id"))) {
+				//if it contains it, check if thing currently in the set with the id is equal to the new thing with the id
+				if( ! responseSet.get(tempArray.getJSONObject(i).getInt("id")).equals(tempArray.getJSONObject(i).getInt("id"))) {
+					//log the diffs and replace it with the newer verison
+					JSONObject newObj = responseMergeAndlogDiffs(responseSet.get(tempArray.getJSONObject(i).getInt("id")), tempArray.getJSONObject(i));
+					responseSet.replace(tempArray.getJSONObject(i).getInt("id"), newObj);
+				} //else they're equal and I don't need to do anything
+			} else {
+				//it didnt contain it, so blindly add it and log that it was added
+				responseSet.put(tempArray.getJSONObject(i).getInt("id"), tempArray.getJSONObject(i));
+				logger.info("For the article with ID: " + articleID + " the response node id: "+ tempArray.getJSONObject(i).getString("id") + 
+						"was in Ji+1 but not in Ji");
+			}
+		}
+		//convert hashmap into array so its a collection	
+		Collection<JSONObject> returnArray = responseSet.values();
+		return returnArray;
+	}
+
+	private JSONObject responseMergeAndlogDiffs(JSONObject olderObject, JSONObject newerObject) {
+		JSONObject returnObject = new JSONObject();
+		//the input to this function is the JSONObject of the "response", so we will get all the keys and values and compare them
+		//I'm doing shallow comparison, I dont want to have to handle the deep recursion of finding minute differences about the post's author's avatar changing or something
+		for(String key: olderObject.keySet()) {
+			if(! newerObject.has(key)) {
+				logger.info("For the article with ID: " + articleID + " the response node id: "+ olderObject.getString("id") + 
+						" had the field: " + key + " in Ji ("+olderObject.getString(key)+") but not in Ji+1"); 
+			}
+			//blindly add all the older object stuff, and then it will get overwritten with the new stuff, or kept if the new one doesn't have that key
+			returnObject.put(key, olderObject.get(key));
+		}
+		for(String key: newerObject.keySet()) {
+			if(! olderObject.has(key)) {
+				logger.info("For the article with ID: " + articleID + " the response node id: "+ newerObject.getString("id") + 
+						" had the field: " + key + " in Ji+1 ("+newerObject.getString(key)+") but not in Ji"); 
+			}
+			if(returnObject.has(key) && !olderObject.get(key).equals(newerObject.get(key))) {
+				logger.info("For the article with ID: " + articleID + " the response node id: "+ newerObject.getString("id") + 
+						" had the field: " + key + " in Ji ("+olderObject.getString(key)+") and in ji+1 ("+newerObject.getString(key)+")");
+			}
+			returnObject.put(key, newerObject.get(key));
+		}
+		return returnObject;
 	}
 	
 }
