@@ -19,17 +19,23 @@ public class jsonMerger {
 		Job job = Job.getInstance(conf, "jsonMerge");
 		job.setJarByClass(jsonMerger.class);
 		job.setMapperClass(jsonMapper.class);
-		//job.setCombinerClass(jsonReducer.class);
+		job.setCombinerClass(jsonReducer.class);
 		job.setReducerClass(jsonReducer.class);
+		
+		job.setMapOutputKeyClass(Text.class);
+		job.setMapOutputValueClass(Text.class);
+		
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(Text.class);
-		//think lazy output format will give me individual files
-		job.setOutputFormatClass(LazyOutputFormat.class);
 		
 		Path input = new Path("./input");
 		FileInputFormat.addInputPath(job, input);
 
 		Path output = new Path("./output");
+		
+		FileSystem fs = FileSystem.get(conf);
+		fs.delete(output);
+		
 		FileOutputFormat.setOutputPath(job, output);
 		
 		System.exit(job.waitForCompletion(true) ? 0 : 1);

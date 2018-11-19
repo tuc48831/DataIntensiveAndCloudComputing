@@ -16,13 +16,12 @@ import org.apache.hadoop.mapreduce.lib.input.FileSplit;
 import org.json.JSONException;
 import org.json.*;
 
-public class jsonMapper extends Mapper<Text, Text, Text, Text>{
+public class jsonMapper extends Mapper<Object, Text, Text, Text>{
 //no to do
-	private final static IntWritable one = new IntWritable(1);
 	private Text articleIdKey = new Text();
 	private Text jsonValue = new Text();
 
-    public void map(Object key, Text value, Context context) throws IOException, InterruptedException, JSONException, ParseException {
+    public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
     	//decode file (it's text, and the only newlines occur between json objects!, easy to work with!)
     	String totalJson = value.toString();
     	//the only newlines occur between objects from what i could see opening the first few files
@@ -38,13 +37,13 @@ public class jsonMapper extends Mapper<Text, Text, Text, Text>{
     		try {
     			//take the string, convert it to a json and add the timestamp as a field
 				tempJson = new JSONObject(json);
-	    		tempJson.put("timeStamp",timeStamp);
+	    		tempJson.put("webscrapeTimeStamp",timeStamp);
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
         	//write the key (the id string) and the value (the total json) to the context for the reducers
-        	articleIdKey.set(articleID);
-        	jsonValue.set(json);
+        	articleIdKey.set(articleID.trim());
+        	jsonValue.set(json.trim());
         	context.write(articleIdKey, jsonValue);
     	}
     	//the reduce will then
