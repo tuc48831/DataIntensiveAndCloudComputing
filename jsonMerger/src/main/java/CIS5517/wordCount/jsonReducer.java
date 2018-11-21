@@ -31,11 +31,10 @@ public class jsonReducer extends Reducer<Text,Text,Text,Text> {
 		for (Text text : values) {
 	    	//convert each value to a json
 	    	try {
-				JSONObject tempJson = new JSONObject(text.toString().trim());
+				JSONObject tempJson = new JSONObject(text.toString());
 				//if we currently dont have any return json for this reducer, set it to the json we just decoded
 				if(jsonHolder == null ) {
 					jsonHolder = tempJson;
-					//remove timestamp
 					returnJson.set(tempJson.toString());
 				//else we should compare them, logging any diffs, and updating
 				} else {
@@ -45,17 +44,18 @@ public class jsonReducer extends Reducer<Text,Text,Text,Text> {
 				}
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
-				logger.info("The failed json conversion was: " + text.toString());
+				logger.debug("The failed json conversion was: " + text.toString());
+				logger.info("The json failed, timescrape fiedl was unable to be decoded");
 				e.printStackTrace();
 			}
     	}
 	    result.set(returnJson.toString());
-	    context.write(key, result);
+	    context.write(key, returnJson);
 	}
 	
 	private JSONObject logDiffsAndUpdate(JSONObject currentJson, JSONObject tempJson, Context context, String articleID) {
 		//get timestamps from both objects
-		int indicator = 0;
+		int indicator = 1;
 		try {
 	    	//a date formatter according to the header from the file (20181015141058 for oct 15th 2018 2:10:58 pm)
 	    	SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -63,15 +63,18 @@ public class jsonReducer extends Reducer<Text,Text,Text,Text> {
 	    	Date currentJsonDate = formatter.parse(currentJson.getString("webscrapeTimeStamp"));
 	    	Date tempJsonDate = formatter.parse(tempJson.getString("webscrapeTimeStamp"));
 	    	//replace returnJson with tempJson if temp is newer, else return the currentJson
-			if(tempJsonDate.after(currentJsonDate)) {
+			if(!tempJsonDate.before(currentJsonDate) && !tempJsonDate.after(currentJsonDate)) {
+				indicator = -1;
+			}
+	    	if(tempJsonDate.after(currentJsonDate)) {
 				indicator = 2;
 			}else {
-				indicator = 1;
+				indicator = 1;						
 			}
 			JSONObject returnJson = logDiffsAndMerge(currentJson, tempJson, indicator, currentJsonDate, tempJsonDate, articleID);
 			return returnJson;
 		} catch (ParseException e) {
-			logger.info("currentjson's timestamp is:" + currentJson.getString("webscrapeTimeStamp"));
+			logger.debug("currentjson's timestamp is:" + currentJson.getString("webscrapeTimeStamp"));
 			e.printStackTrace();
 		}
 		return null;
@@ -80,33 +83,35 @@ public class jsonReducer extends Reducer<Text,Text,Text,Text> {
 	private JSONObject logDiffsAndMerge(JSONObject currentJson, JSONObject tempJson, int indicator, Date currentJsonDate, Date tempJsonDate, String articleID) {
 		JSONObject returnJson = new JSONObject();
 		//the 3 fields are, cursor, code, and responses. I will hardcode what I want to happen
-		boolean cursorIsDifferent = currentJson.getString("cursor").equals(tempJson.getString("cursor"));
-		boolean codeIsDifferent = currentJson.getString("code").equals(tempJson.getString("code"));
-		boolean responseIsDifferent = currentJson.getString("response").equals(tempJson.getString("response"));
+		boolean cursorIsDifferent = currentJson.get("cursor").equals(tempJson.get("cursor"));
+		boolean codeIsDifferent = currentJson.get("code").equals(tempJson.get("code"));
+		boolean responseIsDifferent = currentJson.get("response").equals(tempJson.get("response"));
 		//use indicator to see which object is newer, and use that as the base case
-		if(indicator == 2) { //if indicator is 2, them tempjson is newer
+		if(indicator == -1) {
+			logger.debug("the json's have the same timestamp");
+		}else if(indicator == 2) { //if indicator is 2, them tempjson is newer
 			if(cursorIsDifferent) {
-				logger.info("The \'cursor\' field is different, the old timestamp is: " + currentJsonDate.toString() + " and the new timestamp is: " + tempJsonDate.toString());
-				returnJson.put("cursor", tempJson.getString("cursor"));
+				logger.debug("The \'cursor\' field is different, the old timestamp is: " + currentJsonDate.toString() + " and the new timestamp is: " + tempJsonDate.toString());
+				returnJson.put("cursor", tempJson.get("cursor").toString());
 			}
 			if(codeIsDifferent) {
-				logger.info("The \'code\' field is different, the old timestamp is: " + currentJsonDate.toString() + " and the new timestamp is: " + tempJsonDate.toString());
-				returnJson.put("code", tempJson.getString("code"));
+				logger.debug("The \'code\' field is different, the old timestamp is: " + currentJsonDate.toString() + " and the new timestamp is: " + tempJsonDate.toString());
+				returnJson.put("code", tempJson.get("code").toString());
 			}
 			if(responseIsDifferent) {
-				logger.info("The \'response\' field is different, the old timestamp is: " + currentJsonDate.toString() + " and the new timestamp is: " + tempJsonDate.toString());
+				logger.debug("The \'response\' field is different, the old timestamp is: " + currentJsonDate.toString() + " and the new timestamp is: " + tempJsonDate.toString());
 			}
 		} else { //else tempjson is older
 			if(cursorIsDifferent) {
-				logger.info("The \'cursor\' field is different, the old timestamp is: " + tempJsonDate.toString() + " and the new timestamp is: " + currentJsonDate.toString());
-				returnJson.put("cursor", currentJson.getString("cursor"));
+				logger.debug("The \'cursor\' field is different, the old timestamp is: " + tempJsonDate.toString() + " and the new timestamp is: " + currentJsonDate.toString());
+				returnJson.put("cursor", currentJson.get("cursor").toString());
 			}
 			if(codeIsDifferent) {
-				logger.info("The \'code\' field is different, the old timestamp is: " + tempJsonDate.toString() + " and the new timestamp is: " + currentJsonDate.toString());
-				returnJson.put("code", currentJson.getString("code"));
+				logger.debug("The \'code\' field is different, the old timestamp is: " + tempJsonDate.toString() + " and the new timestamp is: " + currentJsonDate.toString());
+				returnJson.put("code", currentJson.get("code").toString());
 			}
 			if(responseIsDifferent) {
-				logger.info("The \'response\' field is different, the old timestamp is: " + tempJsonDate.toString() + " and the new timestamp is: " + currentJsonDate.toString());
+				logger.debug("The \'response\' field is different, the old timestamp is: " + tempJsonDate.toString() + " and the new timestamp is: " + currentJsonDate.toString());
 			}
 		}
 		//merge here outside the if else because it happens regardless of conditions
@@ -118,7 +123,7 @@ public class jsonReducer extends Reducer<Text,Text,Text,Text> {
 	private Collection<JSONObject> mergeResponses(JSONObject currentJson, JSONObject tempJson, int indicator, String articleID) {
 		JSONArray currentArray = currentJson.getJSONArray("response");
 		JSONArray tempArray = tempJson.getJSONArray("response");
-		HashMap<Integer, JSONObject> responseSet = new HashMap<Integer, JSONObject>();
+		HashMap<String, JSONObject> responseSet = new HashMap<String, JSONObject>();
 		//inside this function i swap temp and current based on the indicator. indicator = 2 means that temp is newer (the default case), 1 means i need to swap
 		if(indicator == 1) { //since the temp is older
 			JSONArray temp = tempArray;
@@ -127,7 +132,7 @@ public class jsonReducer extends Reducer<Text,Text,Text,Text> {
 		} //this is gross but saves A LOT of duplicate code below
 		//iterate through older array first, adding them to a hashmap on the ID field
 		for(int i=0; i < currentArray.length(); i++) {
-			responseSet.put(currentArray.getJSONObject(i).getInt("id"), currentArray.getJSONObject(i));
+			responseSet.put(currentArray.getJSONObject(i).getString("id"), currentArray.getJSONObject(i));
 			//also check if the id from the current array is missing from the new one and log it
 			boolean matched = false;
 			//this is gross because the double for loop makes it look n^2 but the number of responses per article doesn't ever really get too big
@@ -137,23 +142,23 @@ public class jsonReducer extends Reducer<Text,Text,Text,Text> {
 				}
 			}
 			if(! matched) {
-				logger.info("For the article with ID: " + articleID + " the response node id: "+ currentArray.getJSONObject(i).getString("id") + 
+				logger.debug("For the article with ID: " + articleID + " the response node id: "+ currentArray.getJSONObject(i).getString("id") + 
 						"was in Ji but not in Ji+1");
 			}
 		}
 		//iterate through newer array second, if there is a collision, check if theyre different. mark whats different and then replace
 		for(int i=0; i < tempArray.length(); i++) {
-			if(responseSet.containsKey(tempArray.getJSONObject(i).getInt("id"))) {
+			if(responseSet.containsKey(tempArray.getJSONObject(i).getString("id"))) {
 				//if it contains it, check if thing currently in the set with the id is equal to the new thing with the id
-				if( ! responseSet.get(tempArray.getJSONObject(i).getInt("id")).equals(tempArray.getJSONObject(i).getInt("id"))) {
+				if( ! responseSet.get(tempArray.getJSONObject(i).getString("id")).equals(tempArray.getJSONObject(i).getString("id"))) {
 					//log the diffs and replace it with the newer verison
-					JSONObject newObj = responseMergeAndlogDiffs(responseSet.get(tempArray.getJSONObject(i).getInt("id")), tempArray.getJSONObject(i), articleID);
-					responseSet.replace(tempArray.getJSONObject(i).getInt("id"), newObj);
+					JSONObject newObj = responseMergeAndlogDiffs(responseSet.get(tempArray.getJSONObject(i).getString("id")), tempArray.getJSONObject(i), articleID);
+					responseSet.replace(tempArray.getJSONObject(i).getString("id"), newObj);
 				} //else they're equal and I don't need to do anything
 			} else {
 				//it didnt contain it, so blindly add it and log that it was added
-				responseSet.put(tempArray.getJSONObject(i).getInt("id"), tempArray.getJSONObject(i));
-				logger.info("For the article with ID: " + articleID + " the response node id: "+ tempArray.getJSONObject(i).getString("id") + 
+				responseSet.put(tempArray.getJSONObject(i).getString("id"), tempArray.getJSONObject(i));
+				logger.debug("For the article with ID: " + articleID + " the response node id: "+ tempArray.getJSONObject(i).getString("id") + 
 						"was in Ji+1 but not in Ji");
 			}
 		}
@@ -168,7 +173,7 @@ public class jsonReducer extends Reducer<Text,Text,Text,Text> {
 		//I'm doing shallow comparison, I dont want to have to handle the deep recursion of finding minute differences about the post's author's avatar changing or something
 		for(String key: olderObject.keySet()) {
 			if(! newerObject.has(key)) {
-				logger.info("For the article with ID: " + articleID + " the response node id: "+ olderObject.getString("id") + 
+				logger.debug("For the article with ID: " + articleID + " the response node id: "+ olderObject.getString("id") + 
 						" had the field: " + key + " in Ji ("+olderObject.getString(key)+") but not in Ji+1"); 
 			}
 			//blindly add all the older object stuff, and then it will get overwritten with the new stuff, or kept if the new one doesn't have that key
@@ -176,11 +181,11 @@ public class jsonReducer extends Reducer<Text,Text,Text,Text> {
 		}
 		for(String key: newerObject.keySet()) {
 			if(! olderObject.has(key)) {
-				logger.info("For the article with ID: " + articleID + " the response node id: "+ newerObject.getString("id") + 
+				logger.debug("For the article with ID: " + articleID + " the response node id: "+ newerObject.getString("id") + 
 						" had the field: " + key + " in Ji+1 ("+newerObject.getString(key)+") but not in Ji"); 
 			}
 			if(returnObject.has(key) && !olderObject.get(key).equals(newerObject.get(key))) {
-				logger.info("For the article with ID: " + articleID + " the response node id: "+ newerObject.getString("id") + 
+				logger.debug("For the article with ID: " + articleID + " the response node id: "+ newerObject.getString("id") + 
 						" had the field: " + key + " in Ji ("+olderObject.getString(key)+") and in ji+1 ("+newerObject.getString(key)+")");
 			}
 			returnObject.put(key, newerObject.get(key));

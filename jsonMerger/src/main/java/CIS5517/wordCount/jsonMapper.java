@@ -13,10 +13,12 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Mapper.Context;
 import org.apache.hadoop.mapreduce.lib.input.FileSplit;
+import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.json.*;
 
 public class jsonMapper extends Mapper<Object, Text, Text, Text>{
+	private Logger logger = Logger.getLogger(jsonReducer.class);
 //no to do
 	private Text articleIdKey = new Text();
 	private Text jsonValue = new Text();
@@ -37,13 +39,14 @@ public class jsonMapper extends Mapper<Object, Text, Text, Text>{
     		try {
     			//take the string, convert it to a json and add the timestamp as a field
 				tempJson = new JSONObject(json);
+				logger.info("timestamp is:" + timeStamp);
 	    		tempJson.put("webscrapeTimeStamp",timeStamp);
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
         	//write the key (the id string) and the value (the total json) to the context for the reducers
-        	articleIdKey.set(articleID.trim());
-        	jsonValue.set(json.trim());
+        	articleIdKey.set(articleID);
+        	jsonValue.set(tempJson.toString());
         	context.write(articleIdKey, jsonValue);
     	}
     	//the reduce will then
@@ -53,7 +56,7 @@ public class jsonMapper extends Mapper<Object, Text, Text, Text>{
 
 	String[] getIdAndTimestamp(String filepath) {
 		//"splits" the filename using _ and .txt so we get an array 2 long with the article ID as index 0 and the timestamp as 1
-		String pattern = "_|\\.txt";
+		String pattern = "_|\\.";
 		Pattern p = Pattern.compile(pattern);
 		String[] retStrings = p.split(filepath);
 		return retStrings;

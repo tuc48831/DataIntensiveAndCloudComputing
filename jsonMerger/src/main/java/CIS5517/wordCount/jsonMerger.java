@@ -20,7 +20,7 @@ public class jsonMerger {
 		job.setJarByClass(jsonMerger.class);
 		job.setMapperClass(jsonMapper.class);
 		job.setCombinerClass(jsonReducer.class);
-		job.setReducerClass(jsonReducer.class);
+		//job.setReducerClass(jsonReducer.class);
 		
 		job.setMapOutputKeyClass(Text.class);
 		job.setMapOutputValueClass(Text.class);
