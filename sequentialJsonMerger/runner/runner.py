@@ -21,7 +21,7 @@ if __name__ == '__main__':
     outputMap = {}
     changedFields = {}
     #for file in directory
-    path = os.getcwd()+"/inputDebug"
+    path = os.getcwd()+"/inputTest"
     files = os.listdir(path)
     for articleFile in files:
         strings = re.split("_|\.", articleFile)
@@ -58,8 +58,6 @@ if __name__ == '__main__':
     #after all of that we will have a hasmap with proper json objects
     #write out each object to a file with articleID as the name
     for key, value in outputMap.items():
-        with open(os.getcwd()+'/outputDebug/'+key+'.txt', 'w') as outFile:
+        with open(os.getcwd()+'/outputTest/'+key+'.txt', 'w') as outFile:
             outFile.write(json.dumps(value))
-        
-        
 

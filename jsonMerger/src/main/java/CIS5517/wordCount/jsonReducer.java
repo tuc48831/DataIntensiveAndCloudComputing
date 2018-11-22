@@ -45,7 +45,6 @@ public class jsonReducer extends Reducer<Text,Text,Text,Text> {
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				logger.debug("The failed json conversion was: " + text.toString());
-				logger.info("The json failed, timescrape fiedl was unable to be decoded");
 				e.printStackTrace();
 			}
     	}
@@ -93,25 +92,31 @@ public class jsonReducer extends Reducer<Text,Text,Text,Text> {
 			if(cursorIsDifferent) {
 				logger.debug("The \'cursor\' field is different, the old timestamp is: " + currentJsonDate.toString() + " and the new timestamp is: " + tempJsonDate.toString());
 				returnJson.put("cursor", tempJson.get("cursor").toString());
+				logger.info("field updated, HISTOGRAM:cursor");
 			}
 			if(codeIsDifferent) {
 				logger.debug("The \'code\' field is different, the old timestamp is: " + currentJsonDate.toString() + " and the new timestamp is: " + tempJsonDate.toString());
 				returnJson.put("code", tempJson.get("code").toString());
+				logger.info("field updated, HISTOGRAM:code");
 			}
 			if(responseIsDifferent) {
 				logger.debug("The \'response\' field is different, the old timestamp is: " + currentJsonDate.toString() + " and the new timestamp is: " + tempJsonDate.toString());
+				logger.info("field updated, HISTOGRAM:response");
 			}
 		} else { //else tempjson is older
 			if(cursorIsDifferent) {
 				logger.debug("The \'cursor\' field is different, the old timestamp is: " + tempJsonDate.toString() + " and the new timestamp is: " + currentJsonDate.toString());
 				returnJson.put("cursor", currentJson.get("cursor").toString());
+				logger.info("field updated, HISTOGRAM:cursor");
 			}
 			if(codeIsDifferent) {
 				logger.debug("The \'code\' field is different, the old timestamp is: " + tempJsonDate.toString() + " and the new timestamp is: " + currentJsonDate.toString());
 				returnJson.put("code", currentJson.get("code").toString());
+				logger.info("field updated, HISTOGRAM:code");
 			}
 			if(responseIsDifferent) {
 				logger.debug("The \'response\' field is different, the old timestamp is: " + tempJsonDate.toString() + " and the new timestamp is: " + currentJsonDate.toString());
+				logger.info("field updated, HISTOGRAM:response");
 			}
 		}
 		//merge here outside the if else because it happens regardless of conditions
@@ -142,8 +147,8 @@ public class jsonReducer extends Reducer<Text,Text,Text,Text> {
 				}
 			}
 			if(! matched) {
-				logger.debug("For the article with ID: " + articleID + " the response node id: "+ currentArray.getJSONObject(i).getString("id") + 
-						"was in Ji but not in Ji+1");
+				logger.debug("For the article with ID: " + articleID + " the MISSING response node id:"+ currentArray.getJSONObject(i).getString("id") + 
+						". was in Ji but not in Ji+1");
 			}
 		}
 		//iterate through newer array second, if there is a collision, check if theyre different. mark whats different and then replace
@@ -158,8 +163,8 @@ public class jsonReducer extends Reducer<Text,Text,Text,Text> {
 			} else {
 				//it didnt contain it, so blindly add it and log that it was added
 				responseSet.put(tempArray.getJSONObject(i).getString("id"), tempArray.getJSONObject(i));
-				logger.debug("For the article with ID: " + articleID + " the response node id: "+ tempArray.getJSONObject(i).getString("id") + 
-						"was in Ji+1 but not in Ji");
+				logger.debug("For the article with ID: " + articleID + " the MISSING response node id: "+ tempArray.getJSONObject(i).getString("id") + 
+						". was in Ji+1 but not in Ji");
 			}
 		}
 		//convert hashmap into array so its a collection	
@@ -170,7 +175,7 @@ public class jsonReducer extends Reducer<Text,Text,Text,Text> {
 	private JSONObject responseMergeAndlogDiffs(JSONObject olderObject, JSONObject newerObject, String articleID) {
 		JSONObject returnObject = new JSONObject();
 		//the input to this function is the JSONObject of the "response", so we will get all the keys and values and compare them
-		//I'm doing shallow comparison, I dont want to have to handle the deep recursion of finding minute differences about the post's author's avatar changing or something
+		//not going to recursively get information about the author, it seems inconsequential like avatar, location, etc.
 		for(String key: olderObject.keySet()) {
 			if(! newerObject.has(key)) {
 				logger.debug("For the article with ID: " + articleID + " the response node id: "+ olderObject.getString("id") + 
@@ -183,10 +188,12 @@ public class jsonReducer extends Reducer<Text,Text,Text,Text> {
 			if(! olderObject.has(key)) {
 				logger.debug("For the article with ID: " + articleID + " the response node id: "+ newerObject.getString("id") + 
 						" had the field: " + key + " in Ji+1 ("+newerObject.getString(key)+") but not in Ji"); 
+				
 			}
-			if(returnObject.has(key) && !olderObject.get(key).equals(newerObject.get(key))) {
+			if(returnObject.has(key) && !returnObject.get(key).equals(newerObject.get(key))) {
 				logger.debug("For the article with ID: " + articleID + " the response node id: "+ newerObject.getString("id") + 
 						" had the field: " + key + " in Ji ("+olderObject.getString(key)+") and in ji+1 ("+newerObject.getString(key)+")");
+				logger.info("field updated, HISTOGRAM:"+key);
 			}
 			returnObject.put(key, newerObject.get(key));
 		}
