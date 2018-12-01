@@ -19,8 +19,8 @@ public class jsonMerger {
 		Job job = Job.getInstance(conf, "jsonMerge");
 		job.setJarByClass(jsonMerger.class);
 		job.setMapperClass(jsonMapper.class);
-		//job.setCombinerClass(jsonReducer.class);
-		job.setReducerClass(jsonReducer.class);
+		job.setCombinerClass(jsonReducer.class);
+		//job.setReducerClass(jsonReducer.class);
 		
 		job.setMapOutputKeyClass(Text.class);
 		job.setMapOutputValueClass(Text.class);
