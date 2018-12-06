@@ -2,6 +2,7 @@
 import datetime
 import sys
 import json
+import logging
 
 from jsonmerge import Merger
 
@@ -45,7 +46,7 @@ for line in sys.stdin:
         existingTimestamp = current_json['scrapeTimestamp']
         existingTime = datetime.datetime.strptime(existingTimestamp, "%Y-%m-%d %H:%M:%S")
         newTimestamp = jsonObj['scrapeTimestamp']
-        newTime = datetime.datetime.strptime(existingTimestamp, "%Y-%m-%d %H:%M:%S")
+        newTime = datetime.datetime.strptime(newTimestamp, "%Y-%m-%d %H:%M:%S")
         if existingTime > newTime:
             #the already existing entry is newer, merge onto the old one with the schema
             current_json = merger.merge(current_json, jsonObj)
