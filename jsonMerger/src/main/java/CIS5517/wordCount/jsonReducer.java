@@ -89,6 +89,7 @@ public class jsonReducer extends Reducer<Text,Text,Text,Text> {
 		if(indicator == -1) {
 			logger.debug("the json's have the same timestamp");
 		}else if(indicator == 2) { //if indicator is 2, them tempjson is newer
+			returnJson = tempJson;
 			if(cursorIsDifferent) {
 				logger.debug("The \'cursor\' field is different, the old timestamp is: " + currentJsonDate.toString() + " and the new timestamp is: " + tempJsonDate.toString());
 				returnJson.put("cursor", tempJson.get("cursor").toString());
@@ -103,7 +104,9 @@ public class jsonReducer extends Reducer<Text,Text,Text,Text> {
 				logger.debug("The \'response\' field is different, the old timestamp is: " + currentJsonDate.toString() + " and the new timestamp is: " + tempJsonDate.toString());
 				logger.info("field updated, HISTOGRAM:response");
 			}
+			
 		} else { //else tempjson is older
+			returnJson = currentJson;
 			if(cursorIsDifferent) {
 				logger.debug("The \'cursor\' field is different, the old timestamp is: " + tempJsonDate.toString() + " and the new timestamp is: " + currentJsonDate.toString());
 				returnJson.put("cursor", currentJson.get("cursor").toString());
@@ -188,14 +191,8 @@ public class jsonReducer extends Reducer<Text,Text,Text,Text> {
 			if(! olderObject.has(key)) {
 				logger.debug("For the article with ID: " + articleID + " the response node id: "+ newerObject.getString("id") + 
 						" had the field: " + key + " in Ji+1 ("+newerObject.getString(key)+") but not in Ji"); 
-				
+				returnObject.put(key, newerObject.get(key));
 			}
-			if(returnObject.has(key) && !returnObject.get(key).equals(newerObject.get(key))) {
-				logger.debug("For the article with ID: " + articleID + " the response node id: "+ newerObject.getString("id") + 
-						" had the field: " + key + " in Ji ("+olderObject.getString(key)+") and in ji+1 ("+newerObject.getString(key)+")");
-				logger.info("field updated, HISTOGRAM:"+key);
-			}
-			returnObject.put(key, newerObject.get(key));
 		}
 		return returnObject;
 	}

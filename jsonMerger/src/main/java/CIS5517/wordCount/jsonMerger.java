@@ -28,10 +28,10 @@ public class jsonMerger {
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(Text.class);
 		
-		Path input = new Path("./input");
+		Path input = new Path("./inputDebug");
 		FileInputFormat.addInputPath(job, input);
 
-		Path output = new Path("./output");
+		Path output = new Path("./outputDebug");
 		
 		FileSystem fs = FileSystem.get(conf);
 		fs.delete(output);
