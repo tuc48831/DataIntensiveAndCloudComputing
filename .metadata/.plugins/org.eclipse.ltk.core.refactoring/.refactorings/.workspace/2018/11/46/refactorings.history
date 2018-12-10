@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename Java project &apos;wordCount&apos; to &apos;jsonMerger&apos;&#x0A;- Original element: &apos;wordCount&apos;&#x0A;- Renamed element: &apos;wordCount&apos;&#x0A;- Update references to refactored element" description="Rename Java project &apos;wordCount&apos;" flags="7" id="org.eclipse.jdt.ui.rename.java.project" input="=wordCount" name="jsonMerger" references="true" stamp="1541970147123" version="1.0"/>
+</session>

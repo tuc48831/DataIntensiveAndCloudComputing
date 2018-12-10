@@ -1,4 +1,9 @@
 eclipse.preferences.version=1
+<<<<<<< Updated upstream
+=======
+org.eclipse.jdt.core.classpathVariable.M2_REPO=/home/cis5517/.m2/repository
+org.eclipse.jdt.core.codeComplete.visibilityCheck=enabled
+>>>>>>> Stashed changes
 org.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode=enabled
 org.eclipse.jdt.core.compiler.codegen.targetPlatform=10
 org.eclipse.jdt.core.compiler.compliance=10

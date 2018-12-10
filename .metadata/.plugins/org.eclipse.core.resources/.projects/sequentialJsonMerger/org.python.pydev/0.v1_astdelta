@@ -1,1 +1,5 @@
+<<<<<<< Updated upstream
 INSrunner.runner|/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger/runner/runner.py
+=======
+INSMapReduce.mergeReducer|/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger/MapReduce/mergeReducer.py
+>>>>>>> Stashed changes

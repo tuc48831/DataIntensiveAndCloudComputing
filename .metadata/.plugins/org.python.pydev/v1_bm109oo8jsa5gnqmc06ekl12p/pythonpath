@@ -2,6 +2,13 @@
 /usr/lib/python2.7/plat-x86_64-linux-gnu
 /usr/lib/python2.7/lib-tk
 /usr/lib/python2.7/lib-dynload
+<<<<<<< Updated upstream
 /home/cis5517/.local/lib/python2.7/site-packages
 /usr/local/lib/python2.7/dist-packages
 /usr/lib/python2.7/dist-packages
+=======
+/usr/local/lib/python2.7/dist-packages
+/usr/lib/python2.7/dist-packages
+/home/cis5517/.local/lib/python2.7/site-packages
+/usr/local/lib/python3.6
+>>>>>>> Stashed changes

@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;sequentialJsonMerger/runner/input&apos; to &apos;inputDebug&apos;" description="Rename resource &apos;input&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="runner/input" name="inputDebug" stamp="1542856890238" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;sequentialJsonMerger/runner/output&apos; to &apos;outputDebug&apos;" description="Rename resource &apos;output&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="runner/output" name="outputDebug" stamp="1542856904037" updateReferences="true"/>
+</session>

@@ -54,8 +54,13 @@ INDEX VERSION 1.131+/home/cis5517/git/DataIntensiveAndCloudComputing/.metadata/.
 308372980.index
 110756392.index
 3693266851.index
+<<<<<<< Updated upstream
 1180247123.index
 103773439.index
+=======
+103773439.index
+1180247123.index
+>>>>>>> Stashed changes
 3166634872.index
 1266102088.index
 2178959614.index
@@ -67,12 +72,18 @@ INDEX VERSION 1.131+/home/cis5517/git/DataIntensiveAndCloudComputing/.metadata/.
 2347397594.index
 759379876.index
 3844650985.index
+<<<<<<< Updated upstream
 190302091.index
 1311486050.index
+=======
+1311486050.index
+190302091.index
+>>>>>>> Stashed changes
 3249013370.index
 2695502487.index
 646308851.index
 3669505869.index
+<<<<<<< Updated upstream
 120789449.index
 2524431796.index
 1584115078.index
@@ -86,5 +97,20 @@ INDEX VERSION 1.131+/home/cis5517/git/DataIntensiveAndCloudComputing/.metadata/.
 1097525334.index
 3070224633.index
 1788469070.index
+=======
+1584115078.index
+120789449.index
+2524431796.index
+3021256910.index
+2182016282.index
+961390231.index
+1485642362.index
+811277304.index
+1307820821.index
+1788469070.index
+1657979557.index
+1097525334.index
+3070224633.index
+>>>>>>> Stashed changes
 1933849942.index
 2939617553.index

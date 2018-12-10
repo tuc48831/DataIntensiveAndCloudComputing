@@ -2,7 +2,6 @@
 import datetime
 import sys
 import json
-import logging
 
 from jsonmerge import Merger
 

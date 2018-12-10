@@ -1,0 +1,16 @@
+# Start pyspark via provided command
+import pyspark
+
+import findspark
+findspark.init()
+
+# Or the following command
+findspark.init("/path/to/spark_home")
+
+from pyspark import SparkContext, SparkConf
+
+text_file = SparkContext.textFile("hdfs://...")
+counts = text_file.flatMap(lambda line: line.split(" ")) \
+             .map(lambda word: (word, 1)) \
+             .reduceByKey(lambda a, b: a + b)
+counts.saveAsTextFile("hdfs://...")

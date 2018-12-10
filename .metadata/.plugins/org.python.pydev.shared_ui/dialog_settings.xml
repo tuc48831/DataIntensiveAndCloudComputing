@@ -3,7 +3,11 @@
 	<section name="org.python.pydev.core.preferences.CheckDefaultPreferencesDialog">
 		<item value="504" key="width"/>
 		<item value="744" key="x"/>
+<<<<<<< Updated upstream
 		<item value="162" key="y"/>
+=======
+		<item value="191" key="y"/>
+>>>>>>> Stashed changes
 		<item value="467" key="height"/>
 	</section>
 </section>
