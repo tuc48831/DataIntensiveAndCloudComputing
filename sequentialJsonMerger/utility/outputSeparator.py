@@ -5,9 +5,9 @@ import os
 cwd = os.getcwd()
 path = cwd+"/mergeInput/part-00000"
 #open file
-histoFile = open(path, "r")
+realFile = open(path, "r")
 #for line in file
-for line in histoFile:
+for line in realFile:
     #split line by whitespace
     strings = re.split("\s", line, maxsplit=1)
     #get the file name, split it to the ID and timestamp

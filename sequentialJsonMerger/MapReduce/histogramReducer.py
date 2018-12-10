@@ -60,9 +60,9 @@ for line in sys.stdin:
                     diffDict[key] += 1
             else:
                 if value not in diffDict:
-                    diffDict['delete'+value] = 1
+                    diffDict[key+value] = 1
                 else:
-                    diffDict['delete'+value] += 1
+                    diffDict[key+value] += 1
     else:
         current_json = jsonObj
         current_articleID = articleID
