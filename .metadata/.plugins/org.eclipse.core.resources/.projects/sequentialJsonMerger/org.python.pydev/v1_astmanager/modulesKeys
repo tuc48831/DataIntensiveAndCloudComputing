@@ -1,0 +1,11 @@
+MODULES_MANAGER_V2
+MapReduce.__init__|/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger/MapReduce/__init__.py
+MapReduce.histogramReducer|/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger/MapReduce/histogramReducer.py
+MapReduce.mapper|/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger/MapReduce/mapper.py
+MapReduce.mergeReducer|/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger/MapReduce/mergeReducer.py
+Testing.__init__|/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger/Testing/__init__.py
+runner.__init__|/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger/runner/__init__.py
+runner.runner|/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger/runner/runner.py
+utility.__init__|/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger/utility/__init__.py
+utility.histogramGenerator|/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger/utility/histogramGenerator.py
+utility.outputSeparator|/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger/utility/outputSeparator.py

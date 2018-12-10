@@ -1,0 +1,21 @@
+import os
+import json
+from pyspark.sql import SparkSession
+
+#call with /usr/local/spark/bin/spark-submit ~/git/DataIntensiveAndCloudComputing/sparkImpl/Main/testSpark.py 
+
+# Configure the environment                                                     
+if 'SPARK_HOME' not in os.environ:
+    os.environ['SPARK_HOME'] = '/usr/local/spark'
+
+spark = SparkSession.builder.appName("merge_jsons").getOrCreate()
+
+if __name__ == '__main__':
+    
+    files = os.listdir("/home/cis5517/Documents/inputAndOutput/inputDebug/")
+        
+    dataframes = map(lambda r: spark.read.json(r), files)
+    
+    union = reduce(lambda df1, df2: df1.unionAll(df2), dataframes)
+    
+    print 'output!: ', str(union)

@@ -1,0 +1,24 @@
+import os
+import json
+from pyspark import SparkConf, SparkContext, SQLContext
+
+#call with /usr/local/spark/bin/spark-submit ~/git/DataIntensiveAndCloudComputing/sparkImpl/Main/testSpark.py 
+
+# Configure the environment                                                     
+if 'SPARK_HOME' not in os.environ:
+    os.environ['SPARK_HOME'] = '/usr/local/spark'
+
+conf = SparkConf().setAppName('pubmed_open_access').setMaster('local[32]')
+sc = SparkContext(conf=conf)
+
+if __name__ == '__main__':
+    ls = range(100)
+    
+    df = SQLContext.read.json('~/Documents/inputAndOutput/inputDebug/*.json')
+    df.show
+    
+    rdd_jsons = sc.parallelize(df)
+    
+    ls_out = rdd_jsons.map(lambda x: x["cursor"]["id"]).collect()
+    
+    print 'output!: ', ls_out

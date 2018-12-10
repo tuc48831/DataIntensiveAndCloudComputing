@@ -1,0 +1,35 @@
+import os
+import json
+import re
+from pyspark.sql import SparkSession
+from __builtin__ import file
+
+#call with /usr/local/spark/bin/spark-submit ~/git/DataIntensiveAndCloudComputing/sparkImpl/Main/testSpark.py 
+
+# Configure the environment                                                     
+if 'SPARK_HOME' not in os.environ:
+    os.environ['SPARK_HOME'] = '/usr/local/spark'
+
+spark = SparkSession.builder.appName("merge_jsons").getOrCreate()
+
+if __name__ == '__main__':
+    path = "/home/cis5517/Documents/inputAndOutput/input/"
+    files = os.listdir(path)
+    jsons = []
+    for jsonFile in files:
+        strings = re.split("_|\.", jsonFile)
+        #get the file name, split it to the ID and timestamp
+        articleID = strings[0]
+        timeStamp = strings[1]
+        print("timestamp is:" +timeStamp)
+        #decode the timestamp into a real date so i can work with it
+        newDateTime = datetime.datetime.strptime(timeStamp, "%Y%m%d%H%M%S")
+        
+        fullpath = path + jsonFile
+        data = spark.read.json(fullpath)
+        jsons.append(data)
+        
+    
+    union = reduce(lambda df1, df2: df1.unionAll(df2), jsons)
+    
+    print 'output!: ', str(union)

@@ -1,0 +1,25 @@
+import os
+import json
+import pyspark
+from pyspark import SparkConf, SparkContext, SQLContext
+
+#call with /usr/local/spark/bin/spark-submit ~/git/DataIntensiveAndCloudComputing/sparkImpl/Main/testSpark.py 
+
+# Configure the environment                                                     
+if 'SPARK_HOME' not in os.environ:
+    os.environ['SPARK_HOME'] = '/usr/local/spark'
+
+
+spark = SparkSession.builder.appName("merge_jsons").getOrCreate()
+conf = SparkConf().setAppName('pubmed_open_access').setMaster('local[32]')
+sc = SparkContext(conf=conf)
+
+if __name__ == '__main__':
+    
+    files = os.listdir("/home/cis5517/Documents/inputAndOutput/inputDebug/")
+        
+    dataframes = map(lambda r: sq.read.json(r), files)
+    
+    union = reduce(lambda df1, df2: df1.unionAll(df2), dataframes)
+    
+    print 'output!: ', str(union)
