@@ -1,0 +1,46 @@
+import os
+import json
+import re
+import datetime
+import pyspark.sql as sq
+from __builtin__ import file
+from pyspark.sql.functions import input_file_name
+
+#call with /usr/local/spark/bin/spark-submit ~/git/DataIntensiveAndCloudComputing/sparkImpl/Main/testSpark.py 
+
+# Configure the environment                                                     
+if 'SPARK_HOME' not in os.environ:
+    os.environ['SPARK_HOME'] = '/usr/local/spark'
+
+spark = sq.SparkSession.builder.appName("merge_jsons").getOrCreate()
+
+if __name__ == '__main__':
+    path = "/home/cis5517/Documents/inputAndOutput/input/"
+    files = os.listdir(path)
+    data = spark.read.json(path)
+    data.show()
+    
+    data = data.withColumn('articleID',input_file_name().split("_")[0])
+    data = data.withColumn('timeStamp',input_file_name().split("_")[1].split(".")[0])
+    
+    
+    
+    
+    print "POC"
+
+    for jsonFile in files:
+        strings = re.split("_|\.", jsonFile)
+        #get the file name, split it to the ID and timestamp
+        articleID = strings[0]
+        timeStamp = strings[1]
+        print("timestamp is:" +timeStamp)
+        #decode the timestamp into a real date so i can work with it
+        newDateTime = datetime.datetime.strptime(timeStamp, "%Y%m%d%H%M%S")
+
+        fullpath = path + jsonFile
+        data = spark.read.json(fullpath)
+        jsons.append(data)
+    #jsons has all the data as dataframes
+    spark
+    
+    print 'output!: ', str(jsons)

@@ -1,0 +1,23 @@
+'''
+Created on Dec 5, 2018
+
+@author: cis5517
+'''
+
+if __name__ == '__main__':
+    pass
+    #get filename
+    
+    #open file
+    histoFile = open("./histo/part-00000", "r")
+    #for line in file
+    for line in histoFile:
+        #split line by whitespace
+        
+        #first is input filename
+        
+        #second is json
+        
+        #get input filename from end of filepath
+        
+        #write json to new file

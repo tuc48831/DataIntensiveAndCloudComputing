@@ -1,23 +1,15 @@
 -- VERSION_5
 -- START DISKCACHE_2
 /home/cis5517/git/DataIntensiveAndCloudComputing/.metadata/.plugins/org.eclipse.core.resources/.projects/sequentialJsonMerger/com.python.pydev.analysis/v2_indexcache
-<<<<<<< Updated upstream
-runner.runner|1544400515536209000|/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger/runner/runner.py
-=======
-runner.runner|1544365296078010000|/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger/runner/runner.py
->>>>>>> Stashed changes
-utility.outputSeparator|1544058919479303000|/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger/utility/outputSeparator.py
+runner.runner|1544407990650545000|/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger/runner/runner.py
+utility.outputSeparator|1544407990826550000|/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger/utility/outputSeparator.py
 utility.__init__|1544057914191788000|/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger/utility/__init__.py
 MapReduce.__init__|1543891655693376000|/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger/MapReduce/__init__.py
 MapReduce.mapper|1543977087169820000|/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger/MapReduce/mapper.py
 runner.__init__|1542853514129485000|/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger/runner/__init__.py
-utility.histogramGenerator|1544058921935357000|/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger/utility/histogramGenerator.py
-MapReduce.histogramReducer|1544065332705811000|/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger/MapReduce/histogramReducer.py
-<<<<<<< Updated upstream
-MapReduce.mergeReducer|1544399724222880000|/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger/MapReduce/mergeReducer.py
-=======
-MapReduce.mergeReducer|1544365557707248000|/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger/MapReduce/mergeReducer.py
->>>>>>> Stashed changes
+utility.histogramGenerator|1544407990650545000|/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger/utility/histogramGenerator.py
+MapReduce.histogramReducer|1544407990638545000|/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger/MapReduce/histogramReducer.py
+MapReduce.mergeReducer|1544407990638545000|/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger/MapReduce/mergeReducer.py
 Testing.__init__|1543978229150868000|/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger/Testing/__init__.py
 -- END DISKCACHE
 -- START DICTIONARY
@@ -35,19 +27,6 @@ Testing.__init__|1543978229150868000|/home/cis5517/git/DataIntensiveAndCloudComp
 15
 art|2|articleID!1^16#5*19@articleID!3^32#9*35@
 cha|1|changedFields!3^25#5*35@
-<<<<<<< Updated upstream
-cur|4|current_json!5^10#1*51@current_json!7^11#1*67@current_articleID!5^9#1*51@current_articleID!7^10#1*67@
-dif|2|diffs!7^47#13*67@diffDict!7^13#1*67@
-exi|6|existingTimestamp!3^47#21*35@existingTime!5^47#9*51@existingTime!3^48#21*35@existingTime!7^40#9*67@existingTimestamp!5^46#9*51@existingTimestamp!7^39#9*67@
-fil|2|files!3^28#5*35@filename!1^13#5*19@
-jso|5|jsonObj!1^22#9*19@jsonObj!3^42#17*35@jsonObj!7^25#9*67@jsons!1^11#5*19@jsonObj!5^32#9*51@
-lin|4|line!7^18#5*67@line!1^9#5*19@line!3^39#13*35@line!5^25#5*51@
-mer|2|merger!5^20#1*51@merger!3^22#5*35@
-new|7|new_current_json!7^43#9*67@newDateTime!3^36#9*35@newDateTime!1^21#9*19@newTime!5^49#9*51@newTimestamp!7^41#9*67@newTimestamp!5^48#9*51@newTime!7^42#9*67@
-out|1|outputMap!3^24#5*35@
-pat|1|path!3^27#5*35@
-sch|2|schema!5^19#1*51@schema!3^21#5*35@
-=======
 cur|4|current_json!5^9#1*51@current_json!7^11#1*67@current_articleID!5^8#1*51@current_articleID!7^10#1*67@
 dif|2|diffs!7^47#13*67@diffDict!7^13#1*67@
 exi|6|existingTimestamp!3^47#21*35@existingTime!5^46#9*51@existingTime!3^48#21*35@existingTime!7^40#9*67@existingTimestamp!5^45#9*51@existingTimestamp!7^39#9*67@
@@ -59,7 +38,6 @@ new|7|new_current_json!7^43#9*67@newDateTime!3^36#9*35@newDateTime!1^21#9*19@new
 out|1|outputMap!3^24#5*35@
 pat|1|path!3^27#5*35@
 sch|2|schema!5^18#1*51@schema!3^21#5*35@
->>>>>>> Stashed changes
 str|2|strings!3^30#9*35@strings!1^14#5*19@
 tim|2|timeStamp!1^17#5*19@timeStamp!3^33#9*35@
 -- END TREE

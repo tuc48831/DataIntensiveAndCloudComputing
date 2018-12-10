@@ -1,43 +1,25 @@
 -- VERSION_5
 -- START DISKCACHE_2
 /home/cis5517/git/DataIntensiveAndCloudComputing/.metadata/.plugins/org.eclipse.core.resources/.projects/sparkImpl/com.python.pydev.analysis/v2_indexcache
-<<<<<<< Updated upstream
-Main.__init__|1544400515540209000|/home/cis5517/git/DataIntensiveAndCloudComputing/sparkImpl/Main/__init__.py
-Main.pyspark|1544400515540209000|/home/cis5517/git/DataIntensiveAndCloudComputing/sparkImpl/Main/pyspark.py
+Main.__init__|1544407990826550000|/home/cis5517/git/DataIntensiveAndCloudComputing/sparkImpl/Main/__init__.py
 -- END DISKCACHE
 -- START DICTIONARY
-2
-1=/home/cis5517/git/DataIntensiveAndCloudComputing/sparkImpl/Main/pyspark.py
-2=Main.pyspark
+0
 -- END DICTIONARY
 -- START TREE 1
-3
-log|2|logFile!1^3#1*19@logData!1^5#1*19@
-num|2|numAs!1^6#1*19@numBs!1^7#1*19@
-sc|1|sc!1^4#1*19@
-=======
-Main.__init__|1544365296078010000|/home/cis5517/git/DataIntensiveAndCloudComputing/sparkImpl/Main/__init__.py
-Main.testSpark|1544389187791499000|/home/cis5517/git/DataIntensiveAndCloudComputing/sparkImpl/Main/testSpark.py
--- END DISKCACHE
--- START DICTIONARY
-2
-1=/home/cis5517/git/DataIntensiveAndCloudComputing/sparkImpl/Main/testSpark.py
-2=Main.testSpark
--- END DICTIONARY
--- START TREE 1
-11
-art|1|articleID!1^23#9*19@
-dat|1|data!1^30#9*19@
-df|1|df!1^36#9*19@
-fil|1|files!1^18#5*19@
-ful|1|fullpath!1^29#9*19@
-jso|1|jsons!1^19#5*19@
-new|1|newDateTime!1^27#9*19@
-pat|1|path!1^17#5*19@
-spa|1|spark!1^14#1*19@
-str|1|strings!1^21#9*19@
-tim|1|timeStamp!1^24#9*19@
->>>>>>> Stashed changes
+12
+art|0|
+dat|0|
+df|0|
+fil|0|
+ful|0|
+jso|0|
+new|0|
+pat|0|
+spa|0|
+spl|0|
+str|0|
+tim|0|
 -- END TREE
 -- START TREE 2
 0

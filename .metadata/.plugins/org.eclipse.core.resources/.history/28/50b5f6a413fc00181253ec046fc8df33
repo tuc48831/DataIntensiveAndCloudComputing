@@ -1,0 +1,20 @@
+import re
+import os
+
+#open file
+histoFile = open("./mergeInput/part-00000", "r")
+#for line in file
+for line in histoFile:
+    #split line by whitespace
+    strings = re.split(" ", line)
+    #get the file name, split it to the ID and timestamp
+    #first is input filename
+    #second is json
+    filepath = strings[0]
+    json = strings[1]
+    #get article id from filename
+    newStrings = re.split("\/", filepath)
+    #last / is the article id
+    newFile = open("./mergeOutput/"+newStrings[-1],"w")
+    #write json to new file
+    newFile.write(json)

@@ -1,17 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-<<<<<<< Updated upstream
-=======
-	<section name="org.python.pydev.ui.wizards.files.TemplateSelectDialog">
-		<section name="DialogBoundsSettings">
-			<item value="600" key="DIALOG_WIDTH"/>
-			<item value="1|Ubuntu|11.0|0|GTK|1|" key="DIALOG_FONT_NAME"/>
-			<item value="500" key="DIALOG_HEIGHT"/>
-			<item value="629" key="DIALOG_X_ORIGIN"/>
-			<item value="142" key="DIALOG_Y_ORIGIN"/>
-		</section>
-	</section>
->>>>>>> Stashed changes
 	<section name="pydev_completion_proposal_size">
 	</section>
 </section>

@@ -6569,3 +6569,9 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact xerces:xerces
 2018-12-09 18:54:07,580 [Worker-19: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2018-12-09 18:54:07,580 [Worker-19: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/cis5517/git/DataIntensiveAndCloudComputing/jsonMerger/src/test/resources
 >>>>>>> Stashed changes
+2018-12-09 21:13:49,392 [Worker-1: Loading available Gradle versions] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2018-12-09 21:14:02,441 [Worker-1: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - The POM for net.minidev:json-smart:jar:2.3-SNAPSHOT is missing, no dependency information available
+2018-12-09 21:14:04,292 [Worker-1: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-12-09 21:14:04,293 [Worker-1: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/cis5517/git/DataIntensiveAndCloudComputing/jsonMerger/src/main/resources
+2018-12-09 21:14:04,296 [Worker-1: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2018-12-09 21:14:04,296 [Worker-1: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/cis5517/git/DataIntensiveAndCloudComputing/jsonMerger/src/test/resources

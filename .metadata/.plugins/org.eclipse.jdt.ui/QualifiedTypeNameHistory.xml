@@ -1,26 +1,2 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<<<<<<< Updated upstream
 <qualifiedTypeNameHistroy/>
-=======
-<qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.util.regex.Pattern"/>
-    <fullyQualifiedTypeName name="java.util.regex.Matcher"/>
-    <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
-    <fullyQualifiedTypeName name="java.util.Date"/>
-    <fullyQualifiedTypeName name="org.apache.hadoop.fs.FileSystem"/>
-    <fullyQualifiedTypeName name="org.apache.hadoop.mapred.lib.NullOutputFormat"/>
-    <fullyQualifiedTypeName name="org.apache.hadoop.mapreduce.lib.output.LazyOutputFormat"/>
-    <fullyQualifiedTypeName name="org.apache.hadoop.mapreduce.lib.input.FileSplit"/>
-    <fullyQualifiedTypeName name="java.util.Set"/>
-    <fullyQualifiedTypeName name="java.util.HashSet"/>
-    <fullyQualifiedTypeName name="org.junit.Ignore"/>
-    <fullyQualifiedTypeName name="org.apache.hadoop.mapred.lib.MultipleOutputFormat"/>
-    <fullyQualifiedTypeName name="org.apache.hadoop.mapred.OutputCollector"/>
-    <fullyQualifiedTypeName name="org.apache.hadoop.mapred.Reporter"/>
-    <fullyQualifiedTypeName name="org.apache.hadoop.mapred.lib.MultipleOutputs"/>
-    <fullyQualifiedTypeName name="org.apache.hadoop.mapred.SequenceFileOutputFormat"/>
-    <fullyQualifiedTypeName name="org.apache.hadoop.mapred.JobConf"/>
-    <fullyQualifiedTypeName name="org.apache.hadoop.mapred.TextOutputFormat"/>
-    <fullyQualifiedTypeName name="CIS5517.wordCount.jsonMapper"/>
-</qualifiedTypeNameHistroy>
->>>>>>> Stashed changes

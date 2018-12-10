@@ -1,0 +1,22 @@
+import re
+
+if __name__ == '__main__':
+    pass
+    #get filename
+    
+    #open file
+    histoFile = open("./histo/part-00000", "r")
+    #for line in file
+    for line in histoFile:
+        #split line by whitespace
+        strings = re.split(" ", line)
+        #get the file name, split it to the ID and timestamp
+        articleID = strings[0]
+        timeStamp = strings[1]
+        #first is input filename
+        
+        #second is json
+        
+        #get input filename from end of filepath
+        
+        #write json to new file
