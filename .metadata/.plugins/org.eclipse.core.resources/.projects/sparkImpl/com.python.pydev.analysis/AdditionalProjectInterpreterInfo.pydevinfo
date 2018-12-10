@@ -1,12 +1,19 @@
 -- VERSION_5
 -- START DISKCACHE_2
 /home/cis5517/git/DataIntensiveAndCloudComputing/.metadata/.plugins/org.eclipse.core.resources/.projects/sparkImpl/com.python.pydev.analysis/v2_indexcache
+Main.__init__|1544400515540209000|/home/cis5517/git/DataIntensiveAndCloudComputing/sparkImpl/Main/__init__.py
+Main.pyspark|1544400515540209000|/home/cis5517/git/DataIntensiveAndCloudComputing/sparkImpl/Main/pyspark.py
 -- END DISKCACHE
 -- START DICTIONARY
-0
+2
+1=/home/cis5517/git/DataIntensiveAndCloudComputing/sparkImpl/Main/pyspark.py
+2=Main.pyspark
 -- END DICTIONARY
 -- START TREE 1
-0
+3
+log|2|logFile!1^3#1*19@logData!1^5#1*19@
+num|2|numAs!1^6#1*19@numBs!1^7#1*19@
+sc|1|sc!1^4#1*19@
 -- END TREE
 -- START TREE 2
 0

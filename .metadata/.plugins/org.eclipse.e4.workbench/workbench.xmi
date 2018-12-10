@@ -309,7 +309,7 @@
           <tags>removeOnHide</tags>
         </children>
         <children xsi:type="basic:Part" xmi:id="_iZ8kkPwOEeiLc-mkEzt_og" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="outputSeparator" iconURI="platform:/plugin/org.python.pydev.shared_ui/icons/python_file.gif" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;editor id=&quot;org.python.pydev.editor.PythonEditor&quot; name=&quot;outputSeparator.py&quot; partName=&quot;outputSeparator&quot; title=&quot;outputSeparator&quot; tooltip=&quot;sequentialJsonMerger/utility/outputSeparator.py&quot;>&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/sequentialJsonMerger/utility/outputSeparator.py&quot;/>&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;108&quot; selectionTopPixel=&quot;0&quot;/>&#xA;&lt;/editor>"/>
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;editor id=&quot;org.python.pydev.editor.PythonEditor&quot; name=&quot;outputSeparator.py&quot; partName=&quot;outputSeparator&quot; title=&quot;outputSeparator&quot; tooltip=&quot;sequentialJsonMerger/utility/outputSeparator.py&quot;>&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/sequentialJsonMerger/utility/outputSeparator.py&quot;/>&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;150&quot; selectionTopPixel=&quot;0&quot;/>&#xA;&lt;/editor>"/>
           <tags>Editor</tags>
           <tags>org.python.pydev.editor.PythonEditor</tags>
           <tags>removeOnHide</tags>
@@ -447,7 +447,7 @@
     <sharedElements xsi:type="basic:Part" xmi:id="_T5tOQPwOEeiwQZlVfUTEXw" elementId="org.python.pydev.navigator.view" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="PyDev Package Explorer" iconURI="platform:/plugin/org.python.pydev.shared_ui/icons/pydev_package_explorer.gif" tooltip="" closeable="true">
       <persistedState key="originalCompatibilityViewBundle" value="org.python.pydev"/>
       <persistedState key="originalCompatibilityViewClass" value="org.python.pydev.navigator.ui.PydevPackageExplorer"/>
-      <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;view CommonNavigator.LINKING_ENABLED=&quot;0&quot; currentWorkingSetName=&quot;Aggregate for window 1544399753747&quot; org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets=&quot;0&quot;>&#xA;&lt;expanded IMemento.internal.id=&quot;/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger&quot;/>&#xA;&lt;expanded IMemento.internal.id=&quot;/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger/MapReduce&quot;/>&#xA;&lt;expanded IMemento.internal.id=&quot;/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger/runner&quot;/>&#xA;&lt;expanded IMemento.internal.id=&quot;/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger/utility&quot;/>&#xA;&lt;selected IMemento.internal.id=&quot;/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger&quot;/>&#xA;&lt;lastRecentlyUsedFilters/>&#xA;&lt;/view>"/>
+      <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;view CommonNavigator.LINKING_ENABLED=&quot;0&quot; currentWorkingSetName=&quot;Aggregate for window 1544399753747&quot; org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets=&quot;0&quot;>&#xA;&lt;expanded IMemento.internal.id=&quot;/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger&quot;/>&#xA;&lt;expanded IMemento.internal.id=&quot;/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger/MapReduce&quot;/>&#xA;&lt;expanded IMemento.internal.id=&quot;/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger/runner&quot;/>&#xA;&lt;expanded IMemento.internal.id=&quot;/home/cis5517/git/DataIntensiveAndCloudComputing/sequentialJsonMerger/utility&quot;/>&#xA;&lt;expanded IMemento.internal.id=&quot;/home/cis5517/git/DataIntensiveAndCloudComputing/sparkImpl&quot;/>&#xA;&lt;expanded IMemento.internal.id=&quot;/home/cis5517/git/DataIntensiveAndCloudComputing/sparkImpl/Main&quot;/>&#xA;&lt;expanded IMemento.internal.id=&quot;/home/cis5517/git/DataIntensiveAndCloudComputing/jsonMerger&quot;/>&#xA;&lt;selected IMemento.internal.id=&quot;/home/cis5517/git/DataIntensiveAndCloudComputing/sparkImpl&quot;/>&#xA;&lt;lastRecentlyUsedFilters/>&#xA;&lt;/view>"/>
       <tags>View</tags>
       <tags>categoryTag:PyDev</tags>
       <menus xmi:id="_T6YjsPwOEeiwQZlVfUTEXw" elementId="org.python.pydev.navigator.view">
@@ -463,7 +463,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_9USgkPwNEeipzp8y25T4ow" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_fR-uEPwOEeiLc-mkEzt_og" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_817w0_wNEeipzp8y25T4ow"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_HuFUAPwQEeisgYHIA9sBsg" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_817w0_wNEeipzp8y25T4ow"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_9UTHoPwNEeipzp8y25T4ow" elementId="group.edit" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -494,7 +494,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_9UdfsPwNEeipzp8y25T4ow" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_fSCYcPwOEeiLc-mkEzt_og" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_816il_wNEeipzp8y25T4ow"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_HuJlcPwQEeisgYHIA9sBsg" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_816il_wNEeipzp8y25T4ow"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_9UdfsfwNEeipzp8y25T4ow" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -2620,7 +2620,7 @@
   <addons xmi:id="_804AvPwNEeipzp8y25T4ow" elementId="MinMax Addon" contributorURI="platform:/plugin/org.eclipse.platform" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.minmax.MinMaxAddon"/>
   <addons xmi:id="_804AvfwNEeipzp8y25T4ow" elementId="org.eclipse.ui.workbench.addon.0" contributorURI="platform:/plugin/org.eclipse.platform" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.HandlerProcessingAddon"/>
   <addons xmi:id="_81E1APwNEeipzp8y25T4ow" elementId="SplitterAddon" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.splitteraddon.SplitterAddon"/>
-  <addons xmi:id="_IYS0IKimEeS11vbz3f9ezw" elementId="org.eclipse.ui.ide.addon.0" contributorURI="platform:/plugin/org.eclipse.ui.ide" contributionURI="bundleclass://org.eclipse.ui.ide/org.eclipse.ui.internal.ide.addons.SaveAllDirtyPartsAddon"/>
+  <addons xmi:id="_HXoi4fwQEeisgYHIA9sBsg" elementId="org.eclipse.ui.ide.addon.0" contributionURI="bundleclass://org.eclipse.ui.ide/org.eclipse.ui.internal.ide.addons.SaveAllDirtyPartsAddon"/>
   <addons xmi:id="_dz0JgGOlEeSMMaPQU2nlzw" elementId="org.eclipse.ui.ide.application.addon.0" contributorURI="platform:/plugin/org.eclipse.ui.ide.application" contributionURI="bundleclass://org.eclipse.ui.ide.application/org.eclipse.ui.internal.ide.application.addons.ModelCleanupAddon"/>
   <categories xmi:id="_81rR8PwNEeipzp8y25T4ow" elementId="org.eclipse.team.ui.category.team" name="Team" description="Actions that apply when working with a Team"/>
   <categories xmi:id="_81rR8fwNEeipzp8y25T4ow" elementId="org.eclipse.ui.category.views" name="Views" description="Commands for opening views"/>
